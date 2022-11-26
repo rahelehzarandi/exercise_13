@@ -1,25 +1,25 @@
 import mysql.connector
-# connection = mysql.connector.connect(
-#          host='127.0.0.1',
-#          port= 3306,
-#          database='flight_1',
-#          user='root',
-#          password='rahelehz',
-#          autocommit=True
-#          )
+connection = mysql.connector.connect(
+         host='127.0.0.1',
+         port= 3306,
+         database='flight_1',
+         user='root',
+         password='rahelehz',
+         autocommit=True
+         )
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config["SQLAlchemy_host"]='127.0.0.1',
-app.config["SQLAlchemy_port"]=3306,
-app.config["SQLAlchemy_user"]='root',
-app.config["SQLAlchemy_password"]='rahelehz',
-app.config["SQLAlchemy_db"]='flight_1'
-mysql=SQLAlchemy(app)
+# app.config["SQLAlchemy_host"]='127.0.0.1',
+# app.config["SQLAlchemy_port"]=3306,
+# app.config["SQLAlchemy_user"]='root',
+# app.config["SQLAlchemy_password"]='rahelehz',
+# app.config["SQLAlchemy_db"]='flight_1'
+# mysql=SQLAlchemy(app)
 
-@app.route('/')
+@app.route('/index')
 def index():
     args = request.args
     ICAO = int(args.get("ICAO"))
@@ -28,8 +28,8 @@ def index():
     cursor.execute(sql)
     result=cursor.fetchall()
     for row in result:
-        nameAirport=row[0]
-        location=row[1]
+        nameAirport=row[1]
+        location=row[2]
 
     response = {
         "ICAO":ICAO,
