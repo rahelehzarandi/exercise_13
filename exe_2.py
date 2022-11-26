@@ -22,14 +22,14 @@ app = Flask(__name__)
 @app.route('/index')
 def index():
     args = request.args
-    ICAO = int(args.get("ICAO"))
-    sql="Select name,location From airport where gps_code='"+ICAO+"'"
-    cursor=mysql.connection.cursor()
+    ICAO = args.get("ICAO")
+    sql="Select name,municipality From airport where gps_code='"+ICAO+"'"
+    cursor=connection.cursor()
     cursor.execute(sql)
     result=cursor.fetchall()
     for row in result:
-        nameAirport=row[1]
-        location=row[2]
+        nameAirport=row[0]
+        location=row[1]
 
     response = {
         "ICAO":ICAO,

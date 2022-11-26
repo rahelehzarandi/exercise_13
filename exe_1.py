@@ -6,19 +6,19 @@
 from flask import Flask, request
 
 app = Flask(__name__)
-@app.route('/')
+@app.route('/primeNum')
 def primeNum():
     args = request.args
     number1 = int(args.get("number1"))
     if number1>1:
         for i in range(2,number1):
             if (number1 % i) == 0:
-                flag="False"
+                flag=False
                 break
         else:
-            flag="True"
+            flag=True
     else:
-        flag="False"
+        flag=False
 
 
 
